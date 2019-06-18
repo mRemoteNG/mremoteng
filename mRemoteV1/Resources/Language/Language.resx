@@ -2802,4 +2802,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="TestSettings" xml:space="preserve">
       <value>Test Settings</value>
   </data>
+  <data name="strShowParentInfoOnTabs" xml:space="preserve">
+    <value>Show parent information on tab names</value>
+  </data>
 </root>
