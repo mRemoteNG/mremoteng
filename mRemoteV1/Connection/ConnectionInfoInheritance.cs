@@ -3,13 +3,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Connection
 {
     public class ConnectionInfoInheritance
     {
-        private ConnectionInfoInheritance _tempInheritanceStorage;
-
         #region Public Properties
 
         #region General
@@ -404,7 +403,16 @@ namespace mRemoteNG.Connection
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCViewOnly {get; set;}
         #endregion
 
-        [Browsable(false)] public ConnectionInfo Parent { get; private set; }
+        [Browsable(false)]
+        public ConnectionInfo Parent { get; private set; }
+
+        /// <summary>
+        /// Indicates whether this inheritance object is enabled.
+        /// When false, users of this object should not respect inheritance
+        /// settings for individual properties.
+        /// </summary>
+        [Browsable(false)]
+        public bool InheritanceActive => !(Parent is RootNodeInfo || Parent?.Parent is RootNodeInfo);
 
         #endregion
 
@@ -421,31 +429,7 @@ namespace mRemoteNG.Connection
         {
             var newInheritance = (ConnectionInfoInheritance)MemberwiseClone();
             newInheritance.Parent = parent;
-            newInheritance._tempInheritanceStorage = null;
             return newInheritance;
-        }
-
-        public void EnableInheritance()
-        {
-            if (_tempInheritanceStorage != null)
-                UnstashInheritanceData();
-        }
-
-        private void UnstashInheritanceData()
-        {
-            SetAllValues(_tempInheritanceStorage);
-            _tempInheritanceStorage = null;
-        }
-
-        public void DisableInheritance()
-        {
-            StashInheritanceData();
-            TurnOffInheritanceCompletely();
-        }
-
-        private void StashInheritanceData()
-        {
-            _tempInheritanceStorage = Clone(Parent);
         }
 
         public void TurnOnInheritanceCompletely()
@@ -479,15 +463,22 @@ namespace mRemoteNG.Connection
         /// <returns></returns>
         public IEnumerable<string> GetEnabledInheritanceProperties()
         {
-            return GetProperties()
-                .Where(property => (bool)property.GetValue(this))
-                .Select(property => property.Name)
-                .ToList();
+            return InheritanceActive
+                ? GetProperties()
+                    .Where(property => (bool)property.GetValue(this))
+                    .Select(property => property.Name)
+                    .ToList()
+                : Enumerable.Empty<string>();
         }
 
         private bool FilterProperty(PropertyInfo propertyInfo)
         {
-            var exclusions = new[] {"EverythingInherited", "Parent"};
+            var exclusions = new[]
+            {
+                nameof(EverythingInherited),
+                nameof(Parent),
+                nameof(InheritanceActive)
+            };
             var valueShouldNotBeFiltered = !exclusions.Contains(propertyInfo.Name);
             return valueShouldNotBeFiltered;
         }
