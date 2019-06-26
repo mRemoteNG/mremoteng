@@ -106,6 +106,7 @@
     <Compile Include="App\Update\UpdateFile.cs" />
     <Compile Include="App\Update\UpdateInfo.cs" />
     <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\Connections\ConnectionsBackupFrequencyEnum.cs" />
     <Compile Include="Config\Connections\ConnectionsLoadedEventArgs.cs" />
     <Compile Include="Config\Connections\ConnectionsSavedEventArgs.cs" />
     <Compile Include="Config\Connections\CsvConnectionsSaver.cs" />
@@ -525,6 +526,12 @@
     <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UI\Forms\OptionsPages\BackupPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\BackupPage.Designer.cs">
+      <DependentUpon>BackupPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\OptionsPages\CredentialsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -902,6 +909,9 @@
     <EmbeddedResource Include="UI\Forms\OptionsPages\AppearancePage.resx">
       <DependentUpon>AppearancePage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\BackupPage.resx">
+      <DependentUpon>BackupPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
       <DependentUpon>ConnectionsPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -1209,6 +1219,7 @@
     <None Include="Resources\Images\tab_edit.png" />
     <None Include="Resources\Images\tab_delete.png" />
     <None Include="Resources\Images\star.png" />
+    <None Include="Resources\Backup_Icon.ico" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

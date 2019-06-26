@@ -1762,16 +1762,16 @@ If you run into such an error, please create a new connection file!</value>
     <value>Creating quick connect failed</value>
   </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
-    <value>&amp;Warn me when closing connections</value>
+    <value>Warn me when closing connections</value>
   </data>
   <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>Warn me only when e&amp;xiting mRemoteNG</value>
+    <value>Warn me when exiting mRemoteNG</value>
   </data>
   <data name="strRadioCloseWarnMultiple" xml:space="preserve">
-    <value>Warn me only when closing &amp;multiple connections</value>
+    <value>Warn me when closing multiple connections</value>
   </data>
   <data name="strRadioCloseWarnNever" xml:space="preserve">
-    <value>Do &amp;not warn me when closing connections</value>
+    <value>Do not warn me when closing connections</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
@@ -1967,9 +1967,6 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
     <value>Do you want to save the current connections file before loading another?</value>
-  </data>
-  <data name="strSaveConsOnExit" xml:space="preserve">
-    <value>Save connections on exit</value>
   </data>
   <data name="strSaveImageFilter" xml:space="preserve">
     <value>Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png</value>
@@ -2626,9 +2623,6 @@ This page will walk you through the process of upgrading your connections file o
   <data name="DatabaseNotAvailable" xml:space="preserve">
     <value>Database '{0}' not available.</value>
   </data>
-  <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
-    <value>Save connections after every edit</value>
-  </data>
   <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
     <value>Filter search matches in connection tree</value>
   </data>
@@ -2793,6 +2787,27 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="Environment" xml:space="preserve">
     <value>Environment</value>
   </data>
+  <data name="ConnectionsBackupFrequencyDaily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="strConnectionBackupFrequency" xml:space="preserve">
+    <value>Connection Backup Frequency</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyWeekly" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="strConnectionsBackupMaxCount" xml:space="preserve">
+    <value>Maximum number of backups</value>
+  </data>
+  <data name="strConnectionsBackupPath" xml:space="preserve">
+    <value>Location of connection file backup</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyOnEdit" xml:space="preserve">
+    <value>On Edit</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyOnExit" xml:space="preserve">
+    <value>On Exit</value>
+  </data>
   <data name="EncryptionTestResultMessage" xml:space="preserve">
       <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
   </data>
@@ -2813,5 +2828,14 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="strPropertyNameVmId" xml:space="preserve">
     <value>VM ID</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyNever" xml:space="preserve">
+    <value>Never backup connections</value>
+  </data>
+  <data name="strBrowse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="strBackup" xml:space="preserve">
+    <value>Backup</value>
   </data>
 </root>
