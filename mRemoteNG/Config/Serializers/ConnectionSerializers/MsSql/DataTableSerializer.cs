@@ -236,6 +236,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("InheritRdpVersion", typeof(bool));
             dataTable.Columns.Add("EnhancedMode", typeof(bool));
             dataTable.Columns.Add("InheritEnhancedMode", typeof(bool));
+            dataTable.Columns.Add("Favorite", typeof(bool));
+            dataTable.Columns.Add("InheritFavorite", typeof(bool));
+            dataTable.Columns.Add("ICAEncryptionStrength", typeof(string));
+            dataTable.Columns.Add("InheritICAEncryptionStrength", typeof(bool));
+            
+            dataTable.Columns.Add(ConnectionInfo.Prop_StartProgram, typeof(string));
+            dataTable.Columns.Add(ConnectionInfo.Prop_StartProgramWorkDir, typeof(string));
         }
 
         private void SetPrimaryKey(DataTable dataTable)
@@ -314,7 +321,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
              dataRow["RedirectSound"].Equals(connectionInfo.RedirectSound.ToString()) &&
              dataRow["SoundQuality"].Equals(connectionInfo.SoundQuality.ToString()) &&
              dataRow["RedirectAudioCapture"].Equals(connectionInfo.RedirectAudioCapture) &&
-             dataRow["RedirectKeys"].Equals(connectionInfo.RedirectKeys);
+             dataRow["RedirectKeys"].Equals(connectionInfo.RedirectKeys) &&
+             dataRow[ConnectionInfo.Prop_StartProgram].Equals(connectionInfo.StartProgram) &&
+             dataRow[ConnectionInfo.Prop_StartProgramWorkDir].Equals(connectionInfo.StartProgramWorkDir);
 
             isFieldNotChange = isFieldNotChange &&
              dataRow["Connected"].Equals(false) && // TODO: this column can eventually be removed. we now save this property locally
@@ -574,7 +583,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey);
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
             dataRow["RdpVersion"] = connectionInfo.RdpVersion;
-
+            dataRow["Favorite"] = connectionInfo.Favorite;
+            dataRow["ICAEncryptionStrength"] = string.Empty;
+            
+            #region Remote Desktop Services
+            dataRow[ConnectionInfo.Prop_StartProgram] = connectionInfo.StartProgram;
+            dataRow[ConnectionInfo.Prop_StartProgramWorkDir] = connectionInfo.StartProgramWorkDir;
+            #endregion
 
             if (_saveFilter.SaveInheritance)
             {
@@ -643,6 +658,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
                 dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;
                 dataRow["InheritRdpVersion"] = connectionInfo.Inheritance.RdpVersion;
+                dataRow["InheritFavorite"] = connectionInfo.Inheritance.Favorite;
+                dataRow["InheritICAEncryptionStrength"] = false;
             }
             else
             {
@@ -708,6 +725,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayPassword"] = false;
                 dataRow["InheritRDGatewayDomain"] = false;
                 dataRow["InheritRdpVersion"] = false;
+                dataRow["InheritFavorite"] = false;
+                dataRow["InheritICAEncryptionStrength"] = false;
             }
             if (isNewRow)_dataTable.Rows.Add(dataRow);
         }
